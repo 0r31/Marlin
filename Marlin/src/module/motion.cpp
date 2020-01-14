@@ -1302,6 +1302,10 @@ void do_homing_move(const AxisEnum axis, const float distance, const feedRate_t 
     #if ENABLED(SENSORLESS_HOMING)
       stealth_states = start_sensorless_homing_per_axis(axis);
     #endif
+
+    #if HAS_FSR_ADC
+      if (axis == Z_AXIS && distance < 0) thermalManager.resetThreshold();
+    #endif
   }
 
   const feedRate_t real_fr_mm_s = fr_mm_s ?: homing_feedrate(axis);

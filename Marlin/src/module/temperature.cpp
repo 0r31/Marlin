@@ -262,6 +262,11 @@ Temperature thermalManager;
   #endif // HAS_HEATED_CHAMBER
 #endif // HAS_TEMP_CHAMBER
 
+#if HAS_FSR_ADC
+  int16_t Temperature::current_fsr = 0;
+  float Temperature::fsr_threshold = 0.0;
+#endif
+
 // Initialized by settings.load()
 #if ENABLED(PIDTEMP)
   //hotend_pid_t Temperature::pid[HOTENDS];
@@ -2659,6 +2664,20 @@ void Temperature::tick() {
     #if HAS_TEMP_CHAMBER
       case PrepareTemp_CHAMBER: HAL_START_ADC(TEMP_CHAMBER_PIN); break;
       case MeasureTemp_CHAMBER: ACCUMULATE_ADC(temp_chamber); break;
+    #endif
+
+    #if HAS_FSR_ADC
+      case PrepareFsr:
+        HAL_START_ADC(FSR_PIN);
+        break;
+      case MeasureFsr:
+        current_fsr = HAL_READ_ADC();
+        if (DEBUGGING(INFO) && fsr_threshold > 0) {
+          SERIAL_ECHO(current_fsr);
+          SERIAL_CHAR(',');
+          SERIAL_ECHOLN(fsr_threshold);
+        }
+        break;
     #endif
 
     #if HAS_TEMP_ADC_1

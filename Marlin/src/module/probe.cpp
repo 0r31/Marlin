@@ -353,6 +353,10 @@ FORCE_INLINE void probe_specific_action(const bool deploy) {
 
 // returns false for ok and true for failure
 bool set_probe_deployed(const bool deploy) {
+  #if HAS_FSR_ADC
+    endstops.enable_z_probe(deploy);
+    return false;
+  #endif
 
   if (DEBUGGING(LEVELING)) {
     DEBUG_POS("set_probe_deployed", current_position);
@@ -483,6 +487,10 @@ static bool do_probe_move(const float z, const feedRate_t fr_mm_s) {
 
   #if QUIET_PROBING
     probing_pause(true);
+  #endif
+
+  #if HAS_FSR_ADC
+    thermalManager.resetThreshold();
   #endif
 
   // Move down until the probe is triggered

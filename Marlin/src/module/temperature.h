@@ -114,6 +114,9 @@ enum ADCSensorState : char {
   #if HAS_TEMP_CHAMBER
     PrepareTemp_CHAMBER, MeasureTemp_CHAMBER,
   #endif
+  #if HAS_FSR_ADC
+    PrepareFsr, MeasureFsr,
+  #endif
   #if HAS_TEMP_ADC_1
     PrepareTemp_1, MeasureTemp_1,
   #endif
@@ -296,6 +299,21 @@ class Temperature {
 
     #if HAS_TEMP_CHAMBER
       static chamber_info_t temp_chamber;
+    #endif
+
+    #if HAS_FSR_ADC
+      static int16_t current_fsr;
+      static float fsr_threshold;
+
+      FORCE_INLINE static bool fsrTriggered() {
+        bool fsr_triggered = (current_fsr < fsr_threshold);
+        if(fsr_triggered) fsr_threshold = 0.0;
+        return fsr_triggered;
+      }
+
+      FORCE_INLINE static void resetThreshold() {
+        fsr_threshold = current_fsr * float(FSR_THRESHOLD_RATIO);
+      }
     #endif
 
     #if ENABLED(AUTO_POWER_E_FANS)

@@ -583,7 +583,11 @@ void Endstops::update() {
   #endif
 
   #if HAS_Z_MIN && !Z_SPI_SENSORLESS
-    UPDATE_ENDSTOP_BIT(Z, MIN);
+    #if HAS_FSR_ADC
+      SET_BIT_TO(live_state, _ENDSTOP(Z, MIN), thermalManager.fsrTriggered());
+    #else
+      UPDATE_ENDSTOP_BIT(Z, MIN);
+    #endif
     #if Z_MULTI_ENDSTOPS
       #if HAS_Z2_MIN
         UPDATE_ENDSTOP_BIT(Z2, MIN);
