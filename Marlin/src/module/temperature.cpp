@@ -1726,6 +1726,9 @@ void Temperature::init() {
   #if HAS_TEMP_CHAMBER
     HAL_ANALOG_SELECT(TEMP_CHAMBER_PIN);
   #endif
+  #if HAS_FSR_ADC
+    HAL_ANALOG_SELECT(FSR_PIN);
+  #endif
   #if ENABLED(FILAMENT_WIDTH_SENSOR)
     HAL_ANALOG_SELECT(FILWIDTH_PIN);
   #endif
