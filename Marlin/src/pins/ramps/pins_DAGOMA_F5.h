@@ -27,12 +27,20 @@
 
 #define BOARD_INFO_NAME "Dagoma3D F5"
 
+//
+// Endstops
+//
 #define X_STOP_PIN                            2
 #define Y_STOP_PIN                            3
 #define Z_STOP_PIN                           15
 #define FIL_RUNOUT_PIN                       39
 
-#define ORIG_E0_AUTO_FAN_PIN                  7
+//
+// LCD delays
+//
+#define BOARD_ST7920_DELAY_1 DELAY_NS(0)
+#define BOARD_ST7920_DELAY_2 DELAY_NS(250)
+#define BOARD_ST7920_DELAY_3 DELAY_NS(250)
 
 //
 // Import RAMPS 1.4 pins
