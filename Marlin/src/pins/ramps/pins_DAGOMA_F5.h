@@ -34,6 +34,7 @@
 #define Y_STOP_PIN                            3
 #define Z_STOP_PIN                           15
 #define FIL_RUNOUT_PIN                       39
+#define FIL_RUNOUT2_PIN                      14
 
 //
 // LCD delays
