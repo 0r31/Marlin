@@ -49,10 +49,18 @@ int dac_init() {
   mcp4728_setVref_all(DAC_STEPPER_VREF);
   mcp4728_setGain_all(DAC_STEPPER_GAIN);
 
-  if (mcp4728_getDrvPct(0) < 1 || mcp4728_getDrvPct(1) < 1 || mcp4728_getDrvPct(2) < 1 || mcp4728_getDrvPct(3) < 1 ) {
+  //if (mcp4728_getDrvPct(0) < 1 || mcp4728_getDrvPct(1) < 1 || mcp4728_getDrvPct(2) < 1 || mcp4728_getDrvPct(3) < 1 ) {
+  #ifdef DAC_MOTOR_CURRENT_DEFAULT_RAW
+    xyze_uint_t dac_channel_raw = DAC_MOTOR_CURRENT_DEFAULT_RAW;
+    LOOP_XYZE(i) {
+      //SERIAL_ECHOLNPAIR("dac_channel_raw[", i, "] = ", dac_channel_raw[i]);
+      dac_current_raw(i, dac_channel_raw[i]);
+    }
+  #else
     mcp4728_setDrvPct(dac_channel_pct);
-    mcp4728_eepromWrite();
-  }
+  #endif
+  mcp4728_eepromWrite();
+  //}
 
   return 0;
 }
