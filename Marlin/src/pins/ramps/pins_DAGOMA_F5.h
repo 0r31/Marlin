@@ -66,6 +66,6 @@
 #define DAC_MOTOR_CURRENT_DEFAULT_RAW { 1200, 1200, 900, 1200 }
 
 //
-// Import RAMPS 1.4 pins
+// Import default RAMPS 1.4 pins
 //
 #include "pins_RAMPS.h"
