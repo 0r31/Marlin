@@ -54,16 +54,10 @@
 
 #define DAC_STEPPER_SENSE    0.11
 #define DAC_STEPPER_ADDRESS  0
-#define DAC_STEPPER_MAX   3300
+#define DAC_STEPPER_MAX      4096
 #define DAC_STEPPER_VREF     1
-#define DAC_STEPPER_GAIN     0
-#define DAC_OR_ADDRESS    0x00
-
-#ifndef DAC_MOTOR_CURRENT_DEFAULT
-  #define DAC_MOTOR_CURRENT_DEFAULT { 30, 30, 20, 30 } // Default drive percent - M, E1, Z axis (last channel not connected)
-#endif
-
-#define DAC_MOTOR_CURRENT_DEFAULT_RAW { 1200, 1200, 900, 1200 }
+#define DAC_STEPPER_GAIN     1
+#define DAC_OR_ADDRESS       0x00
 
 //
 // Import default RAMPS 1.4 pins

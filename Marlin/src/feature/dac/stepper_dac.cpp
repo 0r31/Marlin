@@ -51,17 +51,10 @@ int StepperDAC::init() {
   mcp4728.setVref_all(DAC_STEPPER_VREF);
   mcp4728.setGain_all(DAC_STEPPER_GAIN);
 
-  #ifdef DAC_MOTOR_CURRENT_DEFAULT_RAW
-    xyze_uint_t dac_channel_raw = DAC_MOTOR_CURRENT_DEFAULT_RAW;
-    LOOP_XYZE(i) {
-      set_current_value(i, dac_channel_raw[i]);
-    }
-  #else
-    if (mcp4728.getDrvPct(0) < 1 || mcp4728.getDrvPct(1) < 1 || mcp4728.getDrvPct(2) < 1 || mcp4728.getDrvPct(3) < 1 ) {
-      mcp4728.setDrvPct(dac_channel_pct);
-    }
-  #endif
-  mcp4728.eepromWrite();
+  if (mcp4728.getDrvPct(0) < 1 || mcp4728.getDrvPct(1) < 1 || mcp4728.getDrvPct(2) < 1 || mcp4728.getDrvPct(3) < 1 ) {
+    mcp4728.setDrvPct(dac_channel_pct);
+    mcp4728.eepromWrite();
+  }
 
   return 0;
 }
