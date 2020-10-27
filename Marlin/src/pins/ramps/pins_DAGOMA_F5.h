@@ -48,7 +48,7 @@
 //
 // DAC steppers
 //
-#define DAC_STEPPER_CURRENT
+#define HAS_MOTOR_CURRENT_DAC
 
 #define DAC_STEPPER_ORDER { 0, 1, 2, 3 }
 
