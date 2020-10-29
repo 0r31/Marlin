@@ -1012,7 +1012,7 @@
  */
 //#define PWM_MOTOR_CURRENT { 1300, 1300, 1250 }          // Values in milliamps
 //#define DIGIPOT_MOTOR_CURRENT { 135,135,135,135,135 }   // Values 0-255 (RAMBO 135 = ~0.75A, 185 = ~1A)
-#define DAC_MOTOR_CURRENT_DEFAULT { 30, 30, 20, 30 }    // Default drive percent - X, Y, Z, E axis
+#define DAC_MOTOR_CURRENT_DEFAULT { 30, 30, 25, 30 }    // Default drive percent - X, Y, Z, E axis
 
 /**
  * I2C-based DIGIPOTs (e.g., Azteeg X3 Pro)
@@ -3587,4 +3587,4 @@
 #define PINS_DEBUGGING
 
 // Enable Marlin dev mode which adds some special commands
-#define MARLIN_DEV_MODE
+//#define MARLIN_DEV_MODE

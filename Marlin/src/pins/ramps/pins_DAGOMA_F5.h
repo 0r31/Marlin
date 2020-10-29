@@ -56,7 +56,7 @@
 #define DAC_STEPPER_ADDRESS  0
 #define DAC_STEPPER_MAX      4096
 #define DAC_STEPPER_VREF     1
-#define DAC_STEPPER_GAIN     1
+#define DAC_STEPPER_GAIN     0
 #define DAC_OR_ADDRESS       0x00
 
 //
