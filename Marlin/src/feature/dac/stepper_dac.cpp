@@ -51,6 +51,7 @@ int StepperDAC::init() {
   mcp4728.setVref_all(DAC_STEPPER_VREF);
   mcp4728.setGain_all(DAC_STEPPER_GAIN);
 
+  // Check current values against config ones and reset them if needed
   if (ABS(dac_channel_pct[0] - mcp4728.getDrvPct(0)) > 1 \
    || ABS(dac_channel_pct[1] - mcp4728.getDrvPct(1)) > 1 \
    || ABS(dac_channel_pct[2] - mcp4728.getDrvPct(2)) > 1 \
