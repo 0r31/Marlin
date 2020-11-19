@@ -33,7 +33,7 @@
 
 bool dac_present = false;
 constexpr xyze_uint8_t dac_order = DAC_STEPPER_ORDER;
-xyze_uint8_t dac_channel_pct = DAC_MOTOR_CURRENT_DEFAULT;
+xyze_uint_t dac_channel_pct = DAC_MOTOR_CURRENT_DEFAULT;
 
 StepperDAC stepper_dac;
 
@@ -52,10 +52,7 @@ int StepperDAC::init() {
   mcp4728.setGain_all(DAC_STEPPER_GAIN);
 
   // Check current values against config ones and reset them if needed
-  if (ABS(dac_channel_pct[0] - mcp4728.getDrvPct(0)) > 1 \
-   || ABS(dac_channel_pct[1] - mcp4728.getDrvPct(1)) > 1 \
-   || ABS(dac_channel_pct[2] - mcp4728.getDrvPct(2)) > 1 \
-   || ABS(dac_channel_pct[3] - mcp4728.getDrvPct(3)) > 1 ) {
+  if (mcp4728.getDrvPct(0) < 1 || mcp4728.getDrvPct(1) < 1 || mcp4728.getDrvPct(2) < 1 || mcp4728.getDrvPct(3) < 1 ) {
     mcp4728.setDrvPct(dac_channel_pct);
     mcp4728.eepromWrite();
   }
